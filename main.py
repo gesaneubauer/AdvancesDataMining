@@ -37,7 +37,7 @@ def main():
 #    elif args.m == 'js':
 #        result = jaccard(0.5)
     elif args.m == 'cs':
-        result = calc_cosine_similarity(datafile = args.d, bands = 2, signature = 25, threshold = 0.73, seed = args.d)
+        result = calc_cosine_similarity(datafile = args.d, bands = 2, signature = 25, threshold = 0.73, seed = args.s)
 
 
 
