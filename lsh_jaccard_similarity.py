@@ -95,8 +95,7 @@ def jaccard_similarity(datafile, bands=20, signature=160, threshold=0.5, seed=20
                         similar_pairs.add(user_pair)
                         # Write similar user pairs to a text file
                         with open("js.txt", "a") as output_file:
-                            for user_pair in similar_pairs:
-                                output_file.write(f"{user_pair[0]}, {user_pair[1]}\n")
+                            output_file.write(f"{user_pair[0]}, {user_pair[1]}\n")
 
     print("Program ran for %s seconds" % (round(time.time() - start_time)))
     print(len(similar_pairs), "similar users found")
