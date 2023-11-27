@@ -96,7 +96,7 @@ def calc_cosine_similarity(datafile, bands = 19, signature = 170, threshold=0.73
 
     # Adding pairs to the set
     for i, j in indices_above_threshold:
-      user_pair = (indices[i] + 1, indices[j] + 1, indices[j] + 1)
+      user_pair = (indices[i] + 1, indices[j] + 1)
       if user_pair not in similar_pairs:  # Check if pair is not already written
         similar_pairs.add(user_pair)
         with open("cs.txt", "a") as output_file:  # Open file in append mode
