@@ -7,6 +7,7 @@ import dcs
 importlib.reload(dcs)
 from dcs import discrete_cosine
 from lsh_with_cosine_similarity import calc_cosine_similarity
+from lsh_jaccard_similarity import jaccard_similarity
 
 def parse_args():
     parser = argparse.ArgumentParser(description='argument to run experiment')
@@ -34,8 +35,8 @@ def main():
     if args.m == 'dcs':
          result = discrete_cosine(data, 0.73, args.s,args.d)
 #         result = data
-#    elif args.m == 'js':
-#        result = jaccard(0.5)
+    elif args.m == 'js':
+        result = jaccard_similarity(datafile = args.d, threshold = 0.5, seed = args.s)
     elif args.m == 'cs':
         result = calc_cosine_similarity(datafile = args.d, threshold = 0.73, seed = args.s)
 
