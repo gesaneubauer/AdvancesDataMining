@@ -19,7 +19,8 @@ def transform_data(datafile):
   return ratings_sparse
 
 #create random projections and form hash code based on if a point is below or above a random projection
-def random_project(hyperplanes, data):
+def random_project(hyperplanes, data, seed):
+  np.random.seed(seed)
   dim =  data.shape[1]
   planes = np.random.rand(dim, hyperplanes) - 0.5
   x = data.dot(planes)
@@ -52,7 +53,7 @@ def get_keys(hash_tables):
   keys_with_multiple_values = []
   for i in range(len(hash_tables)):
     hash_table = hash_tables[i]
-    for key, value in hash_table.items():
+    for _, value in hash_table.items():
       if len(value) > 1:
         keys_with_multiple_values.append((value))
 
@@ -61,11 +62,10 @@ def get_keys(hash_tables):
 #Calculate the cosine similarity of each user of which a part of its hash string occured in the same bucket
 def calc_cosine_similarity(datafile, bands = 10, signature = 100, threshold=0.73, seed=2023):
   print("Starting locality sensitive hashing with cosine similarity")
-  random.seed(seed)
   start_time = time.time()
 
   ratings = transform_data(datafile)
-  hash = random_project(signature, ratings)
+  hash = random_project(signature, ratings, seed)
   hash_tables = buckets(hash, bands)
   hash_indices = get_keys(hash_tables)
 
