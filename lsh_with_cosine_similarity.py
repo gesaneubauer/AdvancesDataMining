@@ -60,8 +60,8 @@ def get_keys(hash_tables):
   return keys_with_multiple_values
 
 #Calculate the cosine similarity of each user of which a part of its hash string occured in the same bucket
-def calc_cosine_similarity(datafile, bands = 10, signature = 100, threshold=0.73, seed=2023):
-  print("Starting locality sensitive hashing with cosine similarity")
+def calc_cosine_similarity(datafile, bands = 19, signature = 170, threshold=0.73, seed=2023):
+  print(f"Starting locality sensitive hashing with cosine similarity, with signatures of size {signature} segmented into {bands} bands")
   start_time = time.time()
 
   ratings = transform_data(datafile)
@@ -75,8 +75,11 @@ def calc_cosine_similarity(datafile, bands = 10, signature = 100, threshold=0.73
   similar_pairs = set()
   k = 0
   for indices in hash_indices:
+    if (time.time() - start_time) >= 1770: #abort run when about to exceed time limit
+      print("task aborted, about to exceed time limit")
+      break
     if k % 1000 == 0:
-      print(k, "buckets compared")
+      print(k, "buckets compared,", "%s seconds passed" % (round(time.time() - start_time)))
     if len(indices) >= 10000:
       continue
     k += 1
@@ -99,5 +102,5 @@ def calc_cosine_similarity(datafile, bands = 10, signature = 100, threshold=0.73
         with open("cs.txt", "a") as output_file:  # Open file in append mode
           output_file.write(f"{user_pair}\n")  # Write the pair to the file
 
-  print("program ran for %s seconds" % (time.time() - start_time))
+  print("program ran for %s seconds" % (round(time.time() - start_time)))
   print(len(similar_pairs), "similar users found")
