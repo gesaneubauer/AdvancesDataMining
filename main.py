@@ -5,8 +5,8 @@ import argparse
 import dcs
 # for any reason dcs.py is not updated after editing
 importlib.reload(dcs)
-
 from dcs import discrete_cosine
+from lsh_with_cosine_similarity import calc_cosine_similarity
 
 def parse_args():
     parser = argparse.ArgumentParser(description='argument to run experiment')
@@ -36,8 +36,8 @@ def main():
 #         result = data
 #    elif args.m == 'js':
 #        result = jaccard(0.5)
-#    elif args.m == 'cs':
-#        result = cosine(0.73)
+    elif args.m == 'cs':
+        result = calc_cosine_similarity(datafile = args.d, bands = 2, signature = 25, threshold = 0.73, seed = args.d)
 
 
 
