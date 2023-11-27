@@ -46,7 +46,7 @@ if __name__ == "__main__":
     '''
     @ Usage
 
-    #eg: python main.py -d D:/user_movie_rating.npy  -s 2020 -m dcs
+    #eg: python main.py -d D:/user_movie_rating.npy  -s 2023 -m dcs
     
     @ Prerequisites
     
